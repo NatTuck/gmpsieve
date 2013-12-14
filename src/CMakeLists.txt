@@ -15,5 +15,5 @@ set(SRC
 	main.cc
     ) 
 
-add_executable(mpisieve-0.0.1 ${HDRS} ${SRC})
-target_link_libraries(mpisieve-0.0.1 gmp mpi)
+add_executable(mpisieve-0.0.2 ${HDRS} ${SRC})
+target_link_libraries(mpisieve-0.0.2 gmp mpi)
