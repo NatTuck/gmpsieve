@@ -8,10 +8,12 @@ SET(CMAKE_CXX_FLAGS "-g -Wall")
 set(HDRS
         utility.h
 	fermatfactor.h
+	quadraticsieve.h
     )
 set(SRC
 	utility.cc
 	fermatfactor.cc
+	quadraticsieve.cc	
 	main.cc
     ) 
 
