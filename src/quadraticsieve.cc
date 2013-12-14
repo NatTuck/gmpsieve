@@ -44,7 +44,9 @@ size_t calculate_end(mpz_t composite)
   mpz_mul_ui(doubled_composite, composite, 2);
   mpz_sqrt(root, doubled_composite);
   size_t res = mpz_get_ui(root);
-
+  size_t much_more_crashes_my_machine = 10000000;
+  if(res > much_more_crashes_my_machine)
+    res = much_more_crashes_my_machine;
   mpz_clear(root);
   mpz_clear(doubled_composite);
 
@@ -91,20 +93,20 @@ int quadratic_sieve(mpz_t result, mpz_t composite)
     size_t end = calculate_end(composite);
   
     if(DEBUG)
-      {
-	printf("Sieving range %zu to %zu\n", start, end);
-	size_t sieve_length = end - start;
-	mpz_t sieve[sieve_length];
+      printf("Sieving range %zu-%zu\n", start, end);
+    size_t sieve_length = end - start;
+    mpz_t sieve[sieve_length];
 
-	for(size_t i = 0; i < sieve_length; i++)
-	  {
-	    mpz_init(sieve[i]);
-	    mpz_set_ui(sieve[i], i + start);
-	    mpz_powm_ui(sieve[i], sieve[i], 2, composite);
-	  }
+    for(size_t i = 0; i < sieve_length; i++)
+      {
+	mpz_init(sieve[i]);
+	mpz_set_ui(sieve[i], i + start);
+	mpz_powm_ui(sieve[i], sieve[i], 2, composite);
       }
+
+    if(DEBUG)
+      printf("Done initializing sieve in range %zu-%zu\n", start, end);
   }
-  
   mpz_t a, b;
   mpz_init(a);
   mpz_init(b);
