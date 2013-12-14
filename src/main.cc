@@ -47,8 +47,8 @@ int main(int argc, char *argv[])
 int main(int argc, char *argv[])
 {
   char input[BUFFLEN];
-  long long n = 0; 
-  { // Read input and float
+  mpz_t n; 
+  { // Initialize n, and read input
 	  
     if (DEBUG)
       printf("Enter your number: ");
@@ -64,18 +64,24 @@ int main(int argc, char *argv[])
       }
     
     { // atoll is garbage. Try to find strtonum from FreeBSD
-      n = atoll(input); 
-      
+      int err = mpz_init_set_str(n, input, 10);
+      assert(err == 0);
     }
   }
   { // Factor using the quadratic sieve and print a factor,
     // provided that there is no error
 	  
-    long long result = 0;
-    int err = 0;
-    quadratic_sieve(result, n, err);
-    printf("%lld\n", result);
+    mpz_t result;
+    mpz_init(result);
+    {
+      int err = 0;
+      err = quadratic_sieve(result, n);
+      assert(err == 0);
+    }
+    gep(result);
+    mpz_clear(result);
   }
+  mpz_clear(n);
   return 0;
 }
 #endif
