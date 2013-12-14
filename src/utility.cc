@@ -14,11 +14,6 @@ void gep(mpz_t n)
 }
 
 // find x^2 = q mod n
-// return
-// -1 q is quadratic non-residue mod n
-//  1 q is quadratic residue mod n
-//  0 q is congruent to 0 mod n
-//
 int mod_sqrt(mpz_t x,mpz_t q,mpz_t n)
 // copied exactly from
 // http://permalink.gmane.org/gmane.comp.lib.gmp.general/4322
