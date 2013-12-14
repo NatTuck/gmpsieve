@@ -8,5 +8,6 @@
 
 void gep(mpf_t n);
 void gep(mpz_t n);
+int mod_sqrt(mpz_t x,mpz_t q,mpz_t n);
 
 #endif
