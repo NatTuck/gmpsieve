@@ -1,7 +1,7 @@
 #ifndef __PRIMES_H__
 #define __PRIMES_H__
-const int primes_length = 9592;
-const int primes[] = {2,
+const size_t primes_length = 9592;
+const size_t primes[] = {2,
 		      3,
 		      5,
 		      7,
