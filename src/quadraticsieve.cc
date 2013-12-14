@@ -4,14 +4,25 @@
 #include "utility.h"
 #include "quadraticsieve.h"
 
-long long legendre_symbol(long long a, long long p)
-{
-  return (a ^ ((p - 1) / 2)) % p;
-}
 
-void quadratic_sieve(long long& result, long long input, int& err)
+
+int quadratic_sieve(mpz_t result, mpz_t composite)
 {
-  printf("%lld", legendre_symbol(input, 2));
+  mpz_t prime;
+  mpz_init(prime);
+  mpz_set_ui(prime, 7);
+
+  int res = mpz_legendre(composite, prime);
+  
+  mpz_t a, b;
+  mpz_init(a);
+  mpz_init(b);
+  mpz_set_ui(a, 5);
+  mpz_set_ui(b, 10);
+
+  mpz_gcd(result, a, b);
+  gep(result);
+  return 0;
 }
 
 
