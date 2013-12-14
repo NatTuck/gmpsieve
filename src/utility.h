@@ -1,6 +1,8 @@
 #ifndef __UTILITY_H__
 #define __UTILITY_H__
 
+#include <gmp.h>
+
 // Stands for good enough print. The printf supplied by gmp is too
 // verbose.
 

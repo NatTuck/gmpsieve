@@ -1,18 +1,12 @@
 #include <assert.h>
-#include <mpi.h>
-#include <gmp.h>
 #include <stdio.h>
 
 #include "utility.h"
 #include "fermatfactor.h"
 
-
 #define DEBUG 1
 
 typedef unsigned int uint;
-
-
-
 
 void mpz_fermat(mpz_t result, mpz_t input)
  // PRECONDITION:                             
