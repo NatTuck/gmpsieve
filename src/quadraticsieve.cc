@@ -44,9 +44,13 @@ size_t calculate_end(mpz_t composite)
   mpz_mul_ui(doubled_composite, composite, 2);
   mpz_sqrt(root, doubled_composite);
   size_t res = mpz_get_ui(root);
-  size_t much_more_crashes_my_machine = 10000000;
+  size_t much_more_crashes_my_machine = 100000;
+  // The world is cruel !
   if(res > much_more_crashes_my_machine)
-    res = much_more_crashes_my_machine;
+    {
+      size_t s = calculate_start(composite);
+      res = s + much_more_crashes_my_machine;
+    }
   mpz_clear(root);
   mpz_clear(doubled_composite);
 
@@ -106,6 +110,31 @@ int quadratic_sieve(mpz_t result, mpz_t composite)
 
     if(DEBUG)
       printf("Done initializing sieve in range %zu-%zu\n", start, end);
+
+    if(DEBUG)
+      printf("Finding smooth numbers over sieve\n");
+
+    mpz_t roots[2]; 
+    size_t roots_length = 2;
+    mpz_init(roots[0]);    
+    mpz_init(roots[1]);    
+    for(size_t i = 0; i < factor_base_length; i++)
+      {
+	if(mpz_cmp_ui(factor_base[i], 2) == 0)
+	  {
+	    roots_length = 1;
+	    mpz_mod_ui(roots[0], composite, 2);
+	  }
+	else
+	  {
+	    mod_sqrt(roots[0], composite, factor_base[i]);
+	    mpz_sub(roots[1], factor_base[i], roots[0]);
+	    roots_length = 2;
+	  }
+
+	
+      }
+    
   }
   mpz_t a, b;
   mpz_init(a);
