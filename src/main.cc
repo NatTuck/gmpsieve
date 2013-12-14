@@ -9,7 +9,6 @@
 #include "utility.h"
 
 #define BUFFLEN 1024
-#define DEBUG 1
 #define FERMAT 0 
 #define QUADRATICSIEVENOGMP 1
 	  
