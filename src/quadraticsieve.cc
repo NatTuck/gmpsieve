@@ -58,8 +58,6 @@ int quadratic_sieve(mpz_t result, mpz_t composite)
   mpz_set_ui(prime, 7);
 
   int res = mpz_legendre(composite, prime);
-
-  
   
   // NOTE: mpz_primes[i] shouldn't ever be larger than the number being factored
   const size_t mpz_primes_length = primes_length;
@@ -88,13 +86,25 @@ int quadratic_sieve(mpz_t result, mpz_t composite)
 	}
     }
 
-  size_t s1 = calculate_start(composite);
-  size_t s2 = calculate_end(composite);
+  {
+    size_t start = calculate_start(composite);
+    size_t end = calculate_end(composite);
   
-  if(DEBUG)
-    {
-      printf("Sieving range %zu to %zu\n", s1, s2);
-    }
+    if(DEBUG)
+      {
+	printf("Sieving range %zu to %zu\n", start, end);
+	size_t sieve_length = end - start;
+	mpz_t sieve[sieve_length];
+
+	for(size_t i = 0; i < sieve_length; i++)
+	  {
+	    mpz_init(sieve[i]);
+	    mpz_set_ui(sieve[i], i + start);
+	    mpz_powm_ui(sieve[i], sieve[i], 2, composite);
+	  }
+      }
+  }
+  
   mpz_t a, b;
   mpz_init(a);
   mpz_init(b);
