@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fermatfactor.h"
+#include "quadraticsieve.h"
 #include "utility.h"
 
 #define BUFFLEN 1024
@@ -47,7 +48,7 @@ int main(int argc, char *argv[])
 int main(int argc, char *argv[])
 {
   char input[BUFFLEN];
-  long long n; 
+  long long n = 0; 
   { // Read input and float
 	  
     if (DEBUG)
@@ -63,11 +64,19 @@ int main(int argc, char *argv[])
 	  }
       }
     
-    {// atoll is garbage. Try to find strtonum from FreeBSD
+    { // atoll is garbage. Try to find strtonum from FreeBSD
       n = atoll(input); 
+      
     }
   }
-  printf("%lld\n", n);
+  { // Factor using the quadratic sieve and print a factor,
+    // provided that there is no error
+	  
+    long long result = 0;
+    int err = 0;
+    quadratic_sieve(result, n, err);
+    printf("%lld\n", result);
+  }
   return 0;
 }
 #endif
