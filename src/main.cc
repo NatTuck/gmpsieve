@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
       printf("Enter your number: ");
 
     fgets(input, BUFFLEN, stdin);
-    for(int i = 0; i < BUFFLEN; i++)
+    for(size_t i = 0; i < BUFFLEN; i++)
       {
 	if ('\n' == input[i])
 	  {
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
       printf("Enter your number: ");
 
     fgets(input, BUFFLEN, stdin);
-    for(int i = 0; i < BUFFLEN; i++)
+    for(size_t i = 0; i < BUFFLEN; i++)
       {
 	if ('\n' == input[i])
 	  {
