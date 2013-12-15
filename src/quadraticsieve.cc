@@ -118,6 +118,9 @@ int quadratic_sieve(mpz_t result, mpz_t composite)
     size_t roots_length = 2;
     mpz_init(roots[0]);    
     mpz_init(roots[1]);    
+    mpz_t rem;
+    mpz_init(rem);
+    int signs[2] = {-1, 1};
     for(size_t i = 0; i < factor_base_length; i++)
       {
 	if(mpz_cmp_ui(factor_base[i], 2) == 0)
@@ -131,8 +134,18 @@ int quadratic_sieve(mpz_t result, mpz_t composite)
 	    mpz_sub(roots[1], factor_base[i], roots[0]);
 	    roots_length = 2;
 	  }
-
-	
+	for (size_t j = 0; j < roots_length; i++)
+	  {
+	    for (size_t k = 0; k < 2; k++)
+	      {
+		mpz_mod(rem, sieve[index], factor);
+		while(mpz_cmp_ui(rem, 0) == 0)
+		  {
+		    mpz_div(sieve[index], sieve[index], factor);
+		    mpz_mod(rem, sieve[index], factor);
+		  }
+	      }
+	  }
       }
     
   }
